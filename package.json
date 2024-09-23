@@ -22,11 +22,11 @@
     "nodemon": "^3.1.7"
   },
   "imports": {
-    "#src/*": "./src/*",
     "#db/*": "./src/db/*",
     "#controllers/*": "./src/controllers/*",
     "#middlewares/*": "./src/middlewares/*",
     "#routers/*": "./src/routers/*",
-    "#schemas/*": "./src/schemas/*"
+    "#schemas/*": "./src/schemas/*",
+    "#src/*": "./src/*"
   }
 }
