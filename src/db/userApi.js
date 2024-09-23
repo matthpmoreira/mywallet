@@ -6,6 +6,6 @@ export async function createUser(user) {
     return collection.insertOne(user);
 }
 
-export async function isUserInDatabase({ email }) {
+export async function readUser({ email }) {
     return collection.findOne({ email });
 }
