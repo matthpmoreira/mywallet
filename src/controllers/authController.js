@@ -9,7 +9,7 @@ export async function signupController(req, res) {
     const user = req.body;
 
     try {
-        const isUserInDatabase = Bool(await readUser(user));
+        const isUserInDatabase = Boolean(await readUser(user));
 
         if (isUserInDatabase) {
             return res.sendStatus(http.CONFLICT);
