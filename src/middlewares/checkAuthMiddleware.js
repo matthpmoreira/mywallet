@@ -8,7 +8,7 @@ function getToken(req) {
     return token;
 }
 
-export async function authMiddleware(req, res, next) {
+export async function checkAuthMiddleware(req, res, next) {
     const token = getToken(req);
 
     try {

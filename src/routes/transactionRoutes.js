@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { authMiddleware } from "#middlewares/authMiddleware.js";
+import { checkAuthMiddleware } from "#middlewares/checkAuthMiddleware.js";
 import { validationMiddleware } from "#middlewares/validationMiddleware.js";
 import {
     postTransaction,
@@ -14,7 +14,7 @@ import {
 } from "#schemas/transactionSchema.js"
 
 export const transactionRoutes = Router();
-transactionRoutes.use(authMiddleware);
+transactionRoutes.use(checkAuthMiddleware);
 transactionRoutes.post("/transactions", validationMiddleware(postTransactionSchema), postTransaction);
 transactionRoutes.get("/transactions", getPaginatedTransactions);
 transactionRoutes.put("/transactions", validationMiddleware(putTransactionSchema), putTransaction);
