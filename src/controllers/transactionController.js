@@ -1,9 +1,10 @@
-import { createTransaction, readManyTransactions } from "#db/transactionApi.js";
+import { createTransaction, readManyTransactions, updateTransaction } from "#db/transactionApi.js";
 import http from "http-status";
 
 export async function postTransaction(req, res) {
     const transaction = req.body;
     transaction.userId = res.locals.user._id;
+    delete transaction._id;
 
     try {
         await createTransaction(transaction);
@@ -28,6 +29,29 @@ export async function getPaginatedTransactions(req, res) {
     try {
         const transactions = await readManyTransactions(userId, skip, limit);
         res.send(transactions);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(http.INTERNAL_SERVER_ERROR);
+    }
+}
+
+export async function putTransaction(req, res) {
+    const transaction = req.body;
+    const userId = res.locals.user._id;
+
+    const isAuthorized = userId === transaction.userId;
+    if (!isAuthorized) {
+        return res.sendStatus(http.UNAUTHORIZED);
+    }
+
+    try {
+        const result = await updateTransaction(transaction);
+
+        if (result.matchedCount === 0) {
+            return res.sendStatus(http.NOT_FOUND);
+        }
+
+        res.sendStatus(http.NO_CONTENT);
     } catch (err) {
         console.error(err);
         res.sendStatus(http.INTERNAL_SERVER_ERROR);
