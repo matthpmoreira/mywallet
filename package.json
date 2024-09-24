@@ -26,7 +26,7 @@
     "#db/*": "./src/db/*",
     "#controllers/*": "./src/controllers/*",
     "#middlewares/*": "./src/middlewares/*",
-    "#routers/*": "./src/routers/*",
+    "#routes/*": "./src/routes/*",
     "#schemas/*": "./src/schemas/*",
     "#src/*": "./src/*"
   }
