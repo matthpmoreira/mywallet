@@ -52,7 +52,7 @@ export async function putTransaction(req, res) {
             return res.sendStatus(http.UNAUTHORIZED);
         }
         
-        await updateTransaction(transaction);
+        await updateTransaction(id, updatedTransaction);
         res.sendStatus(http.NO_CONTENT);
     } catch (err) {
         console.error(err);

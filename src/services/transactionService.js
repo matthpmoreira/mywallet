@@ -25,9 +25,11 @@ export async function readUserTransactions(userId, page) {
     return collection.find({ userId }, { skip, limit }).toArray();
 }
 
-export async function updateTransaction(id, newTransaction) {
+export async function updateTransaction(id, updatedTransaction) {
     const _id = new ObjectId(id);
-    return collection.updateOne({ _id }, { $set: newTransaction });
+    delete updatedTransaction._id;
+    delete updatedTransaction.userId;
+    return collection.updateOne({ _id }, { $set: updatedTransaction });
 }
 
 export async function removeTransaction(id) {
