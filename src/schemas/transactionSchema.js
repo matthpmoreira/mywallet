@@ -22,7 +22,4 @@ export const putTransactionSchema = joi.object({
     ...idSchema
 });
 
-export const deleteTransactionSchema = joi.object({
-    ...userIdSchema,
-    ...idSchema
-});
+export const deleteTransactionSchema = joi.object(idSchema);
