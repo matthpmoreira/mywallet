@@ -30,7 +30,7 @@ export async function loginController(req, res) {
             return res.sendStatus(http.NOT_FOUND);
         }
 
-        const user = readUser(credentials.email)
+        const user = await readUser(credentials.email)
         const isMatchingPassword = bcrypt.compareSync(credentials.password, user.password);
         if (!isMatchingPassword) {
             return res.sendStatus(http.UNAUTHORIZED);
