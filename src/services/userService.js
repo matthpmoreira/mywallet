@@ -11,6 +11,6 @@ export async function readUser(email) {
 }
 
 export async function isUserStored(email) {
-    const user = collection.findOne({ email });
+    const user = await collection.findOne({ email });
     return Boolean(user);
 }

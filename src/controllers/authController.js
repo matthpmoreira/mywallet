@@ -9,7 +9,7 @@ export async function signupController(req, res) {
     const user = req.body;
 
     try {
-        if (isUserStored(user.email)) {
+        if (await isUserStored(user.email)) {
             return res.sendStatus(http.CONFLICT);
         }
 
@@ -26,10 +26,11 @@ export async function loginController(req, res) {
     const credentials = req.body;
 
     try {
-        if (!isUserStored(user.email)) {
+        if (!await isUserStored(credentials.email)) {
             return res.sendStatus(http.NOT_FOUND);
         }
 
+        const user = readUser(credentials.email)
         const isMatchingPassword = bcrypt.compareSync(credentials.password, user.password);
         if (!isMatchingPassword) {
             return res.sendStatus(http.UNAUTHORIZED);

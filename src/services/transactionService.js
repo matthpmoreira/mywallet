@@ -9,13 +9,13 @@ export async function insertTransaction(transaction) {
 
 export async function isTransactionStored(id) {
     const _id = new ObjectId(id);
-    const transaction = collection.findOne({ _id });
+    const transaction = await collection.findOne({ _id });
     return Boolean(transaction);
 }
 
 export async function isTransactionOwner(id, userId) {
     const _id = new ObjectId(id);
-    const transaction = collection.findOne({ _id });
+    const transaction = await collection.findOne({ _id });
     return transaction.userId === userId;
 }
 
