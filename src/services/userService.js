@@ -1,4 +1,4 @@
-import { database } from "./database.js";
+import { database } from "./databaseService.js";
 
 const collection = database.collection("users");
 

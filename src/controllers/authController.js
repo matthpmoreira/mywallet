@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import http from "http-status";
 import jwt from "jsonwebtoken";
-import { createUser, readUser } from "#db/userApi.js";
+import { createUser, readUser } from "#services/userService.js";
 
 const secret = process.env.JWT_SECRET;
 

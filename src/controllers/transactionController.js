@@ -1,4 +1,4 @@
-import { createTransaction, dbDeleteTransaction, readManyTransactions, updateTransaction } from "#db/transactionApi.js";
+import { createTransaction, dbDeleteTransaction, readManyTransactions, updateTransaction } from "#services/transactionService.js";
 import http from "http-status";
 
 export async function postTransaction(req, res) {
