@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import http from "http-status";
 import jwt from "jsonwebtoken";
-import { createUser, readUser, isUserStored } from "#services/userService.js";
+import { insertUser, readUser, isUserStored } from "#services/userService.js";
 
 const secret = process.env.JWT_SECRET;
 
@@ -14,7 +14,7 @@ export async function signupController(req, res) {
         }
 
         user.password = bcrypt.hashSync(user.password, 10);
-        await createUser(user);
+        await insertUser(user);
         res.sendStatus(http.CREATED);
     } catch (err) {
         console.error(err);
