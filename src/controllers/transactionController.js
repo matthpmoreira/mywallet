@@ -73,7 +73,7 @@ export async function deleteTransaction(req, res) {
             return res.sendStatus(http.UNAUTHORIZED);
         }
         
-        await removeTransaction(id, userId);
+        await removeTransaction(id);
         res.sendStatus(http.NO_CONTENT);
     } catch (err) {
         console.error(err);
