@@ -1,4 +1,4 @@
-import { createTransaction, readManyTransactions, updateTransaction } from "#db/transactionApi.js";
+import { createTransaction, dbDeleteTransaction, readManyTransactions, updateTransaction } from "#db/transactionApi.js";
 import http from "http-status";
 
 export async function postTransaction(req, res) {
@@ -49,6 +49,24 @@ export async function putTransaction(req, res) {
 
         if (result.matchedCount === 0) {
             return res.sendStatus(http.NOT_FOUND);
+        }
+
+        res.sendStatus(http.NO_CONTENT);
+    } catch (err) {
+        console.error(err);
+        res.sendStatus(http.INTERNAL_SERVER_ERROR);
+    }
+}
+
+export async function deleteTransaction(req, res) {
+    const _id = req.body._id;
+    const userId = res.locals.user._id;
+
+    try {
+        const result = await dbDeleteTransaction(_id, userId);
+
+        if (result.deletedCount === 0) {
+            res.sendStatus(http.NOT_FOUND);
         }
 
         res.sendStatus(http.NO_CONTENT);

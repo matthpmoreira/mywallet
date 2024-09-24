@@ -17,3 +17,7 @@ export async function updateTransaction(newTransaction) {
 
     return collection.updateOne({ _id }, { $set: newTransaction });
 }
+
+export async function dbDeleteTransaction(id, userId) {
+    return collection.deleteOne({ _id: new ObjectId(id), userId });
+}
