@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import http from "http-status";
 import jwt from "jsonwebtoken";
-import { createUser, readUser } from "#services/userService.js";
+import { createUser, readUser, isUserStored } from "#services/userService.js";
 
 const secret = process.env.JWT_SECRET;
 
@@ -9,9 +9,7 @@ export async function signupController(req, res) {
     const user = req.body;
 
     try {
-        const isUserInDatabase = Boolean(await readUser(user));
-
-        if (isUserInDatabase) {
+        if (isUserStored(user.email)) {
             return res.sendStatus(http.CONFLICT);
         }
 
@@ -28,8 +26,7 @@ export async function loginController(req, res) {
     const credentials = req.body;
 
     try {
-        const user = await readUser(credentials);
-        if (user == null) {
+        if (!isUserStored(user.email)) {
             return res.sendStatus(http.NOT_FOUND);
         }
 
