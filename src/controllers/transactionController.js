@@ -44,11 +44,11 @@ export async function putTransaction(req, res) {
     const id = updatedTransaction._id;
 
     try {
-        if (!isTransactionStored(id)) {
+        if (!await isTransactionStored(id)) {
             return res.sendStatus(http.NOT_FOUND);
         }
 
-        if (!isTransactionOwner(id, userId)) {
+        if (!await isTransactionOwner(id, userId)) {
             return res.sendStatus(http.UNAUTHORIZED);
         }
         
@@ -65,11 +65,11 @@ export async function deleteTransaction(req, res) {
     const id = req.body._id;
 
     try {
-        if (!isTransactionStored(id)) {
+        if (!await isTransactionStored(id)) {
             return res.sendStatus(http.NOT_FOUND);
         }
 
-        if (!isTransactionOwner(id, userId)) {
+        if (!await isTransactionOwner(id, userId)) {
             return res.sendStatus(http.UNAUTHORIZED);
         }
         
